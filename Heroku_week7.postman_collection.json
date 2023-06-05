@@ -1,0 +1,386 @@
+{
+	"info": {
+		"_postman_id": "9f1f71c9-22ef-4d53-9c8f-e376b9b18403",
+		"name": "Heroku_week7",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19763572"
+	},
+	"item": [
+		{
+			"name": "會員功能",
+			"item": [
+				{
+					"name": "註冊會員",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Peter\",\r\n    \"email\": \"peter@gmail.com\",\r\n    \"sex\": \"male\",\r\n    \"password\": \"1q2w3e4r\",\r\n    \"confirmPassword\": \"1q2w3e4r\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/sign_up",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"sign_up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "登入會員",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"peter@gmail.com\",\r\n    \"password\": \"1q2w3e4r\",\r\n    \"confirmPassword\": \"1q2w3e4r\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/sign_in",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"sign_in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "重設密碼",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"ZX123456\",\r\n    \"confirmPassword\": \"ZX123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/updatePassword",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"updatePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得個人資料",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/users/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更新個人資料",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"John\",\r\n    \"sex\": \"male\",\r\n    \"photo\": \"https://i.imgur.com/IReA1sm.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "動態貼文",
+			"item": [
+				{
+					"name": "取得所有貼文",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/posts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增貼文",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \r\n    \"content\": \"今天下雨天\",\r\n    \"tags\": \"心情\",\r\n    \"type\": \"group\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "編輯貼文",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"content\": \"修改貼文987\",\r\n    \"tags\": \"666\",\r\n    \"type\": \"group\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/post/{{postID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"post",
+								"{{postID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刪除單筆貼文",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/post/{{postID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"post",
+								"{{postID}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刪除所有貼文",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/posts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "其他",
+			"item": [
+				{
+					"name": "上傳圖片",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"type": "file",
+									"src": "/C:/Users/pidder/Desktop/Josh菜單.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/upload",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://metawall-week7.herokuapp.com",
+			"type": "string"
+		},
+		{
+			"key": "jwt",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTYwN2E2YTc3MGUzYTZmZDU0NWRhOSIsImlhdCI6MTY1NTA0ODM4MCwiZXhwIjoxNjU1NjUzMTgwfQ.WgTQkYedEDfnXN721ij6h0ldwmgggNChh7b0OUWeNKs",
+			"type": "string"
+		},
+		{
+			"key": "postID",
+			"value": "62a5fa8268f77b6bde1562ed",
+			"type": "string"
+		},
+		{
+			"key": "userID",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
