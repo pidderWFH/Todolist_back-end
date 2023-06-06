@@ -22,16 +22,18 @@ const posts = {
         const { body } = req;
         
         if( !body.content || !body.tags || !body.type ){
-            return next(appError(400, "未填必填欄位", next));
+            // return next(appError(400, "未填必填欄位", next));
+            return appError(400, "未填必填欄位", next);
         }
 
         if( !body.content.trim() || !body.tags.trim() || !body.type.trim() ){
   
-            return next(appError(400, "欄位不能為空白", next));
+            // return next(appError(400, "欄位不能為空白", next));
+            return appError(400, "欄位不能為空白", next);
         }
         const newPost = await Post.create(
             {
-                user: req.user.id,
+                user: req.userID,
                 content: body.content,
                 image: body.image,
                 tags: body.tags,
@@ -60,7 +62,8 @@ const posts = {
         if (deleteOne){
             res.status(200).send({ stutus: "success", data: deleteOne });
         }else{
-            return next(appError(400, "無此貼文", next));
+            // return next(appError(400, "無此貼文", next));
+            return appError(400, "無此貼文", next);
         }
         
     },
@@ -103,7 +106,8 @@ const posts = {
             // handle.handleSucess(res, post);
             res.status(200).send({ status: "success", data: patchPost });
         }else {
-            return next(appError(400, "修改貼文失敗，無此貼文", next));
+            // return next(appError(400, "修改貼文失敗，無此貼文", next));
+            return appError(400, "修改貼文失敗，無此貼文", next);
         } 
     },
 }

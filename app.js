@@ -69,13 +69,22 @@ app.use(function(req, res, next) {
     // dev
     err.statusCode = err.statusCode || 500;
     if (process.env.NODE_ENV === 'dev') {
+      err.statusCode = 400;
+      err.isOperational = true;
       return resErrorDev(err, res);
     } 
     // production
     if (err.name === 'ValidationError'){
-      err.message = "資料欄位未填寫正確，請重新輸入！"
+      err.statusCode = 400;
+      err.message = "資料欄位未填寫正確，請重新輸入！";
       err.isOperational = true;
       return resErrorProd(err, res)
+    }
+    // JSON format error
+    if(err instanceof SyntaxError && err.statusCode === 400 && 'body' in err) {
+      err.message = '資料格式有誤:' + err.message;
+      err.isOperational = true;
+      return resErrorProd(err, res);
     }
     resErrorProd(err, res)
   });

@@ -6,11 +6,13 @@ const upload = {
   async postUpload(req, res, next){
     
     if(!req.files.length) {
-        return next(appError(400,"尚未上傳檔案", next));
+        // return next(appError(400,"尚未上傳檔案", next));
+        return appError(400,"尚未上傳檔案", next);
       }
     const dimensions = sizeOf(req.files[0].buffer);
     if(dimensions.width !== dimensions.height) {
-      return next(appError(400,"圖片長寬不符合 1:1 尺寸，請重新上傳", next));
+      // return next(appError(400,"圖片長寬不符合 1:1 尺寸，請重新上傳", next));
+      return appError(400,"圖片長寬不符合 1:1 尺寸，請重新上傳", next);
     }
     const client = new ImgurClient({
       clientId: process.env.IMGUR_CLIENTID,

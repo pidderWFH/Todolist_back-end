@@ -30,7 +30,8 @@ const isAuth = handleErrorAsync(async (req, res, next) => {
     })
     const currentUser = await User.findById(decoded.id);
   
-    req.user = currentUser;
+    // req.user = currentUser;
+    req.userID = currentUser.id;
     next();
   });
 const generateSendJWT= (user,statusCode,res)=>{
